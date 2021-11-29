@@ -4,6 +4,7 @@ namespace TddSocialNetwork.Model
 {
     public class User
     {
+        public int Id { get; set; }
         public string Name { get; set; }
 
         public List<Post> TimelinePosts { get; set; }
@@ -11,6 +12,10 @@ namespace TddSocialNetwork.Model
         public List<User> FollowerUsers { get; set; }
 
         public List<Message> PrivateMessages { get; set; }
+
+        public User()
+        {
+        }
 
         public User(string name)
         {

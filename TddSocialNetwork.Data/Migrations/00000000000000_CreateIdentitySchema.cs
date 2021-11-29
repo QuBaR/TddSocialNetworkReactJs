@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 
-namespace TddSocialNetwork.Web.Data.Migrations
+namespace TddSocialNetwork.Data.Migrations
 {
     public partial class CreateIdentitySchema : Migration
     {

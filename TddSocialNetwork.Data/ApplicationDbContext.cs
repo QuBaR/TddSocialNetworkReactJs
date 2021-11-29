@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using TddSocialNetwork.Web.Models;
+using TddSocialNetwork.Model;
 
-namespace TddSocialNetwork.Web.Data
+namespace TddSocialNetwork.Data
 {
     public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
     {
@@ -13,5 +13,9 @@ namespace TddSocialNetwork.Web.Data
             IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
         {
         }
+
+        public DbSet<User> Users { get; set; }
+        public DbSet<Message> Messages { get; set; }
+        public DbSet<Post> Posts { get; set; }
     }
 }

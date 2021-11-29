@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using TddSocialNetwork.Web.Data;
-using TddSocialNetwork.Web.Models;
+using TddSocialNetwork.Data;
+using TddSocialNetwork.Model;
 
 namespace TddSocialNetwork.Web
 {
