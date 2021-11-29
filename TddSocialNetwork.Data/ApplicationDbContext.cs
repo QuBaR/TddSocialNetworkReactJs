@@ -12,6 +12,7 @@ namespace TddSocialNetwork.Data
             DbContextOptions options,
             IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
         {
+            ChangeTracker.LazyLoadingEnabled = false;
         }
 
         public DbSet<User> Users { get; set; }

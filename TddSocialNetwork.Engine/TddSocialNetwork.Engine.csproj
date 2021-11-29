@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TddSocialNetwork.Data\TddSocialNetwork.Data.csproj" />
     <ProjectReference Include="..\TddSocialNetwork.Model\TddSocialNetwork.Model.csproj" />
   </ItemGroup>
 

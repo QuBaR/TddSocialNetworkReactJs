@@ -1,16 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using TddSocialNetwork.Data;
 using TddSocialNetwork.Model;
 
 namespace TddSocialNetwork.Engine
 {
     public class SocialNetworkEngine
     {
-        private string userName;
         public List<User> Users { get; set; }
+        private readonly ApplicationDbContext _context;
 
         public SocialNetworkEngine()
         {
+            
             Users = new List<User>();
         }
 
@@ -69,7 +71,7 @@ namespace TddSocialNetwork.Engine
 
         public List<Post> Timeline(string userName)
         {
-            return Users.FirstOrDefault(x => x.Name == userName)?.TimelinePosts;
+            return Users.FirstOrDefault(x => x.Name == userName)?.TimelinePosts.ToList();
         }
 
         public void SendMessage(string userName, string receiverName, string messageToSend)

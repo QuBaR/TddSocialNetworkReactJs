@@ -7,7 +7,7 @@ namespace TddSocialNetwork.Model
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public List<Post> TimelinePosts { get; set; }
+        public virtual ICollection<Post> TimelinePosts { get; set; }
 
         public List<User> FollowerUsers { get; set; }
 

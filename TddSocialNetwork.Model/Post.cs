@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 
 namespace TddSocialNetwork.Model
 {
@@ -8,6 +9,7 @@ namespace TddSocialNetwork.Model
 
         public string Message { get; set; }
         public DateTime Created { get; set; }
+        public virtual User User { get; set; }
 
         public Post()
         {
