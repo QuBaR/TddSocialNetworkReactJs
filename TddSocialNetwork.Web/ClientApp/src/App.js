@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router';
+import TimeAgo from 'javascript-time-ago'
+import en from 'javascript-time-ago/locale/en.json'
 import { Layout } from './components/Layout';
 import { Home } from './components/Home';
 import { FetchData } from './components/FetchData';
@@ -8,6 +10,7 @@ import ApiAuthorizationRoutes from './components/api-authorization/ApiAuthorizat
 import { ApplicationPaths } from './components/api-authorization/ApiAuthorizationConstants';
 
 import './custom.css'
+TimeAgo.addDefaultLocale(en)
 
 export default class App extends Component {
   static displayName = App.name;

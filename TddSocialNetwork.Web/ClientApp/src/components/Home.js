@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import authService from './api-authorization/AuthorizeService'
-
+import ReactTimeAgo from 'react-time-ago'
 
 export class Home extends Component {
     static displayName = Home.name;
@@ -24,7 +24,11 @@ export class Home extends Component {
                             <div className='card-body'>
                                 <h5 className='card-title'>{post.user.name}</h5>
                                 <p className='card-text'>{post.message}</p>
-                                <p class="card-text"><small class="text-muted">{post.created}</small></p>
+                                <p class="card-text">
+                                    <small class="text-muted">
+                                        <ReactTimeAgo date={post.created} locale="en-US"/>
+                                    </small>
+                                </p>
                             </div>
                         </div>
                     )}
