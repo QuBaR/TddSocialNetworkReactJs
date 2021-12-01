@@ -19,10 +19,10 @@ namespace TddSocialNetwork.Web.Controllers
     {
         private readonly ApplicationDbContext _context;
 
-        private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ILogger<WallController> _logger;
         private readonly IMapper _mapper;
 
-        public WallController(ILogger<WeatherForecastController> logger,
+        public WallController(ILogger<WallController> logger,
             ApplicationDbContext context,
             IMapper mapper)
         {
