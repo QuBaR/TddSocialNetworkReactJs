@@ -16,8 +16,7 @@ export class Home extends Component {
 
     static renderPosts(posts) {
         return (
-            <div className='container'>
-                <div className='col-12'>
+                <div>
                     {posts.map(post =>
                         <div className='card'>
                             <img className='card-img-top' />
@@ -26,14 +25,13 @@ export class Home extends Component {
                                 <p className='card-text'>{post.message}</p>
                                 <p class="card-text">
                                     <small class="text-muted">
-                                        <ReactTimeAgo date={post.created} locale="en-US"/>
+                                        <ReactTimeAgo date={post.created} locale="en-US" />
                                     </small>
                                 </p>
                             </div>
                         </div>
                     )}
                 </div>
-            </div>
         );
     }
 
@@ -42,10 +40,12 @@ export class Home extends Component {
             ? <p><em>Loading...</em></p>
             : Home.renderPosts(this.state.posts);
         return (
-            <div>
-                <h1 id="tabelLabel" >Posts feed</h1>
-                <p>This component demonstrates fetching data from the server.</p>
-                {contents}
+            <div className="row">
+                <div className="col-12">
+                    <h1 id="tabelLabel" >Posts feed</h1>
+                    <p>This component demonstrates fetching data from the server.</p>
+                    {contents}
+                </div>
             </div>
         );
     }
