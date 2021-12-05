@@ -1,10 +1,12 @@
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
+using Webb.Data;
 
 namespace Webb
 {
@@ -28,6 +30,9 @@ namespace Webb
             {
                 configuration.RootPath = "ClientApp/build";
             });
+
+            services.AddDbContext<SocialNetworkDbContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("SocialNetworkDbContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
