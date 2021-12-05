@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 
-namespace TddSocialNetwork.Web.Dto
+namespace Webb.Dto
 {
     public class PostDto
     {

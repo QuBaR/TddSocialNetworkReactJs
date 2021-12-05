@@ -1,4 +1,4 @@
-﻿namespace TddSocialNetwork.Web.Dto
+﻿namespace Webb.Dto
 {
     public class UserDto
     {

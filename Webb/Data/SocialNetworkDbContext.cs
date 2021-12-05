@@ -14,6 +14,6 @@ namespace Webb.Data
         {
         }
 
-        public DbSet<TddSocialNetwork.Model.Post> Post { get; set; }
+        public DbSet<Post> Post { get; set; }
     }
 }
