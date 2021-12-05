@@ -25,7 +25,10 @@ namespace Webb.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Post>>> GetPost()
         {
-            return await _context.Post.ToListAsync();
+            return await _context
+                .Post
+                .Include(x => x.User)
+                .ToListAsync();
         }
 
         // GET: api/Posts/5
