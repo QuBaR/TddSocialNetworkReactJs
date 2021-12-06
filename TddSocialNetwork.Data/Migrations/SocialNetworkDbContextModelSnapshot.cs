@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Webb.Data;
+using TddSocialNetwork.Data;
 
-namespace Webb.Migrations
+namespace TddSocialNetwork.Data.Migrations
 {
     [DbContext(typeof(SocialNetworkDbContext))]
     partial class SocialNetworkDbContextModelSnapshot : ModelSnapshot
@@ -42,7 +42,7 @@ namespace Webb.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Message");
+                    b.ToTable("Messages");
                 });
 
             modelBuilder.Entity("TddSocialNetwork.Model.Post", b =>
@@ -65,7 +65,7 @@ namespace Webb.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Post");
+                    b.ToTable("Posts");
                 });
 
             modelBuilder.Entity("TddSocialNetwork.Model.User", b =>
@@ -85,7 +85,7 @@ namespace Webb.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("User");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("TddSocialNetwork.Model.Message", b =>

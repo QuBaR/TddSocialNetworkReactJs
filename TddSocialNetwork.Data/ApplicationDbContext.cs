@@ -1,22 +1,21 @@
-﻿using IdentityServer4.EntityFramework.Options;
-using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.EntityFrameworkCore;
 using TddSocialNetwork.Model;
 
 namespace TddSocialNetwork.Data
 {
-    public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
+    public class SocialNetworkDbContext : DbContext
     {
-        public ApplicationDbContext(
-            DbContextOptions options,
-            IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
+        public SocialNetworkDbContext()
         {
-            ChangeTracker.LazyLoadingEnabled = false;
         }
 
+        public SocialNetworkDbContext(DbContextOptions<SocialNetworkDbContext> options)
+            : base(options)
+        {
+        }
+
+        public DbSet<Post> Posts { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Message> Messages { get; set; }
-        public DbSet<Post> Posts { get; set; }
     }
 }

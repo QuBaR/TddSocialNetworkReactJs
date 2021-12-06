@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TddSocialNetwork.Data.Migrations
 {
-    public partial class AddPostUserMessage : Migration
+    public partial class Initialmigrationscript : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

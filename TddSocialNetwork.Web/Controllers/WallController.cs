@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using TddSocialNetwork.Data;
-using TddSocialNetwork.Model;
 using TddSocialNetwork.Web.Dto;
 
 namespace TddSocialNetwork.Web.Controllers
@@ -17,13 +16,13 @@ namespace TddSocialNetwork.Web.Controllers
     [Route("[controller]")]
     public class WallController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly SocialNetworkDbContext _context;
 
         private readonly ILogger<WallController> _logger;
         private readonly IMapper _mapper;
 
         public WallController(ILogger<WallController> logger,
-            ApplicationDbContext context,
+            SocialNetworkDbContext context,
             IMapper mapper)
         {
             _logger = logger;

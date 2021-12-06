@@ -1,25 +1,30 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using TddSocialNetwork.Data;
 using TddSocialNetwork.Model;
 
 namespace TddSocialNetwork.Engine
 {
-    public class SocialNetworkEngine
+    public class SocialNetworkEngine : ISocialNetworkEngine
     {
-        public List<User> Users { get; set; }
-        private readonly ApplicationDbContext _context;
+        private readonly IRepository<Post> _postRepository;
+        private readonly IRepository<User> _userRepository;
 
-        public SocialNetworkEngine()
+        public SocialNetworkEngine(
+            IRepository<Post> postRepository,
+            IRepository<User> userRepository)
         {
-            
-            Users = new List<User>();
+            _postRepository = postRepository;
+            _userRepository = userRepository;
         }
 
-    
         public void Post(string name, string message)
         {
-            var existingUser = Users.FirstOrDefault(x => x.Name == name);
+            var existingUser = _userRepository
+                .GetAll()
+                .FirstOrDefault(x => x.Name == name);
             
             if (existingUser != null)
             {
@@ -30,7 +35,8 @@ namespace TddSocialNetwork.Engine
                 var newUser = new User(name);
                 var post = new Post(message);
                 newUser.TimelinePosts.Add(post);
-                Users.Add(newUser);
+                _userRepository.Insert(newUser);
+                _userRepository.Save();
             }
 
             if (message.Contains("@"))
@@ -38,18 +44,22 @@ namespace TddSocialNetwork.Engine
                 var messageArray = message.Split(' ');
                 var newUserName = messageArray[0].Split('@')[1];
 
-                var userToReceiveMessage = Users.FirstOrDefault(x => x.Name == newUserName);
+                var userToReceiveMessage = _userRepository.GetAll()
+                    .FirstOrDefault(x => x.Name == newUserName);
+
                 if (userToReceiveMessage == null)
                 {
                     var newUser = new User(newUserName);
                     newUser.TimelinePosts.Add(new Post(message));
 
-                    Users.Add(newUser);
+                    _userRepository.Insert(newUser);
                 }
                 else
                 {
                     userToReceiveMessage?.TimelinePosts.Add(new Post(message));
                 }
+
+                _userRepository.Save();
 
             }
         }
@@ -58,9 +68,9 @@ namespace TddSocialNetwork.Engine
 
         public void Follow(string userName, string userNameToFollow)
         {
-            var user = Users.FirstOrDefault(x => x.Name == userName);
+            var user = _userRepository.GetAll().FirstOrDefault(x => x.Name == userName);
             
-            var userToFollow = Users.FirstOrDefault(x => x.Name == userNameToFollow);
+            var userToFollow = _userRepository.GetAll().FirstOrDefault(x => x.Name == userNameToFollow);
 
             if (user != null && userToFollow != null)
             {
@@ -71,53 +81,56 @@ namespace TddSocialNetwork.Engine
 
         public List<Post> Timeline(string userName)
         {
-            return Users.FirstOrDefault(x => x.Name == userName)?.TimelinePosts.ToList();
+            return _userRepository.GetAll().FirstOrDefault(x => x.Name == userName)?.TimelinePosts.ToList();
         }
 
         public void SendMessage(string userName, string receiverName, string messageToSend)
         {
             var message = new Message(userName, messageToSend);
-            var user = Users.FirstOrDefault(x => x.Name == userName);
+            var user = _userRepository.GetAll().FirstOrDefault(x => x.Name == userName);
             if (user == null)
             {
                 user = new User(userName);
-                Users.Add(user);
+                _userRepository.Insert(user);
             }
 
-            var receiverUser = Users.FirstOrDefault(x => x.Name == receiverName);
+            var receiverUser = _userRepository.GetAll().FirstOrDefault(x => x.Name == receiverName);
             if (receiverUser == null)
             {
                 receiverUser = new User(receiverName);
-                Users.Add(receiverUser);
+                _userRepository.Insert(receiverUser);
             }
 
-            receiverUser = Users.FirstOrDefault(x => x.Name == receiverName);
+            receiverUser = _userRepository.GetAll().FirstOrDefault(x => x.Name == receiverName);
             receiverUser?.PrivateMessages.Add(message);
-            Users.Remove(receiverUser);
-            Users.Add(receiverUser);
+            _userRepository.Update(receiverUser);
+            _userRepository.Save();
         }
 
         public List<Message> ViewMessages(string receiverName)
         {
-            return Users.FirstOrDefault(x => x.Name == receiverName)?.PrivateMessages;
+            return _userRepository.GetAll().FirstOrDefault(x => x.Name == receiverName)?.PrivateMessages;
         }
 
-        public List<Post> Wall(string userName)
+        public async Task<List<Post>> Wall(string userName)
         {
             var allPosts = new List<Post>();
-            var user = Users.FirstOrDefault(x => x.Name == userName);
+
+            var user = await _userRepository.GetAll()
+                .FirstOrDefaultAsync(x => x.Name == userName);
 
             if (user != null)
             {
-
                 var users = user?.FollowerUsers;
 
                 foreach (var followerUser in users)
                 {
-                    var timelinePosts = Users.FirstOrDefault(x => x.Name == followerUser.Name)?.TimelinePosts;
+                    var timelinePosts = await _userRepository.GetAll()
+                        .Include(x => x.TimelinePosts)
+                        .FirstOrDefaultAsync(x => x.Name == followerUser.Name);
 
                     if (timelinePosts != null)
-                        allPosts.AddRange(timelinePosts);
+                        allPosts.AddRange(timelinePosts.TimelinePosts);
                 }
             }
 

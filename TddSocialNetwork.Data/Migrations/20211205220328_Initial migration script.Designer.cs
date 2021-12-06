@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Webb.Data;
+using TddSocialNetwork.Data;
 
-namespace Webb.Migrations
+namespace TddSocialNetwork.Data.Migrations
 {
     [DbContext(typeof(SocialNetworkDbContext))]
-    [Migration("20211205205647_Post added")]
-    partial class Postadded
+    [Migration("20211205220328_Initial migration script")]
+    partial class Initialmigrationscript
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -44,7 +44,7 @@ namespace Webb.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Message");
+                    b.ToTable("Messages");
                 });
 
             modelBuilder.Entity("TddSocialNetwork.Model.Post", b =>
@@ -67,7 +67,7 @@ namespace Webb.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Post");
+                    b.ToTable("Posts");
                 });
 
             modelBuilder.Entity("TddSocialNetwork.Model.User", b =>
@@ -87,7 +87,7 @@ namespace Webb.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("User");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("TddSocialNetwork.Model.Message", b =>

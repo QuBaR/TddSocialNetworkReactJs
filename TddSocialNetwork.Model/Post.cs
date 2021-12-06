@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections;
 
 namespace TddSocialNetwork.Model
 {
-    public class Post
+    public class Post : IEntity
     {
         public int Id { get; set; }
 

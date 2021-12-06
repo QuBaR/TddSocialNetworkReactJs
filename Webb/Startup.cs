@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
-using Webb.Data;
+using TddSocialNetwork.Data;
+using TddSocialNetwork.Engine;
+using TddSocialNetwork.Model;
 
 namespace Webb
 {
@@ -35,6 +36,9 @@ namespace Webb
                     options.UseSqlServer(Configuration.GetConnectionString("SocialNetworkDbContext")));
 
             services.AddAutoMapper(typeof(MappingProfile));
+
+            services.AddTransient<ISocialNetworkEngine, SocialNetworkEngine>();
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
         }
 

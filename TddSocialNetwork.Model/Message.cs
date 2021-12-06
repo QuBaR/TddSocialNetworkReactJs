@@ -2,7 +2,7 @@ using System;
 
 namespace TddSocialNetwork.Model
 {
-    public class Message
+    public class Message : IEntity
     {
         public int Id { get; set; }
 
