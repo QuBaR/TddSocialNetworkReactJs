@@ -33,13 +33,13 @@ namespace Webb
             });
 
             services.AddDbContext<SocialNetworkDbContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("SocialNetworkDbContext")));
+                    options.UseSqlServer(Configuration.GetConnectionString("SocialNetworkDbContext"))
+                    );
 
             services.AddAutoMapper(typeof(MappingProfile));
 
-            services.AddTransient<ISocialNetworkEngine, SocialNetworkEngine>();
+            services.AddScoped<ISocialNetworkEngine, SocialNetworkEngine>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

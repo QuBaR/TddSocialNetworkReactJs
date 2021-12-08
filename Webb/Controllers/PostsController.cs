@@ -20,10 +20,9 @@ namespace Webb.Controllers
         private readonly ILogger<PostsController> _logger;
         private readonly IMapper _mapper;
 
-
         public PostsController(
             ILogger<PostsController> logger, 
-            IMapper mapper, 
+            IMapper mapper,
             ISocialNetworkEngine socialNetworkEngine)
         {
             _logger = logger;

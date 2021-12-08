@@ -1,10 +1,9 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
 namespace TddSocialNetwork.Data
 {
-    public class Repository<T> : IRepository<T> where T : class, IEntity
+    public class Repository<T> : IRepository<T> where T : class
     {
         protected DbSet<T> DbSet = null;
         protected readonly SocialNetworkDbContext Context = null;

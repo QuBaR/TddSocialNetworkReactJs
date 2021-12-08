@@ -81,7 +81,11 @@ namespace TddSocialNetwork.Engine
 
         public List<Post> Timeline(string userName)
         {
-            return _userRepository.GetAll().FirstOrDefault(x => x.Name == userName)?.TimelinePosts.ToList();
+            return _userRepository
+                .GetAll()
+                .FirstOrDefault(x => x.Name == userName)?
+                .TimelinePosts
+                .ToList();
         }
 
         public void SendMessage(string userName, string receiverName, string messageToSend)
