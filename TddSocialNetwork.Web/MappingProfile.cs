@@ -1,8 +1,8 @@
-﻿using TddSocialNetwork.Model;
-using AutoMapper;
-using Webb.Dto;
+﻿using AutoMapper;
+using TddSocialNetwork.Model;
+using TddSocialNetwork.Web.Dto;
 
-namespace Webb
+namespace TddSocialNetwork.Web
 {
     public class MappingProfile : Profile
     {

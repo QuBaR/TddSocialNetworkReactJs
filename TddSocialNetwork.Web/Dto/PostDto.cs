@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Webb.Dto
+namespace TddSocialNetwork.Web.Dto
 {
     public class PostDto
     {

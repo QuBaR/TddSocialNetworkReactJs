@@ -1,15 +1,14 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.EntityFrameworkCore;
 using TddSocialNetwork.Data;
 using TddSocialNetwork.Engine;
-using TddSocialNetwork.Model;
 
-namespace Webb
+namespace TddSocialNetwork.Web
 {
     public class Startup
     {

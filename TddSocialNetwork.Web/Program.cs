@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace Webb
+namespace TddSocialNetwork.Web
 {
     public class Program
     {

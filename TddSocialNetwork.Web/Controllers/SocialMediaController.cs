@@ -3,14 +3,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using TddSocialNetwork.Data;
 using TddSocialNetwork.Engine;
-using TddSocialNetwork.Model;
-using Webb.Dto;
+using TddSocialNetwork.Web.Dto;
 
-namespace Webb.Controllers
+namespace TddSocialNetwork.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
