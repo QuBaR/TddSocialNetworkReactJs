@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TddSocialNetwork.Test", "Td
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TddSocialNetwork.Data", "TddSocialNetwork.Data\TddSocialNetwork.Data.csproj", "{D38BB098-BD36-4710-82D7-6946E8FF2D46}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webb", "Webb\Webb.csproj", "{C7AF530D-1E62-4E78-A71D-DA066D20E7BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TddSocialNetwork.Web", "TddSocialNetwork.Web\TddSocialNetwork.Web.csproj", "{6CE97CE8-FD84-4AB9-9C93-8F696421037B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{D38BB098-BD36-4710-82D7-6946E8FF2D46}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D38BB098-BD36-4710-82D7-6946E8FF2D46}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D38BB098-BD36-4710-82D7-6946E8FF2D46}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C7AF530D-1E62-4E78-A71D-DA066D20E7BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C7AF530D-1E62-4E78-A71D-DA066D20E7BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C7AF530D-1E62-4E78-A71D-DA066D20E7BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C7AF530D-1E62-4E78-A71D-DA066D20E7BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CE97CE8-FD84-4AB9-9C93-8F696421037B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CE97CE8-FD84-4AB9-9C93-8F696421037B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CE97CE8-FD84-4AB9-9C93-8F696421037B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CE97CE8-FD84-4AB9-9C93-8F696421037B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
