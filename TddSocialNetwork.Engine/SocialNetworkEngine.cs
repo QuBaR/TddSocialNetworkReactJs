@@ -125,9 +125,7 @@ namespace TddSocialNetwork.Engine
 
             if (user != null)
             {
-                var users = user?.FollowerUsers;
-
-                foreach (var followerUser in users)
+                foreach (var followerUser in user?.FollowerUsers)
                 {
                     var timelinePosts = await _userRepository.GetAll()
                         .Include(x => x.TimelinePosts)
@@ -137,6 +135,26 @@ namespace TddSocialNetwork.Engine
                         allPosts.AddRange(timelinePosts.TimelinePosts);
                 }
             }
+
+            return allPosts.OrderByDescending(x => x.Created).ToList();
+        }
+
+        public async Task<List<Post>> Wall()
+        {
+            var allPosts = new List<Post>();
+            var users = await _userRepository
+                .GetAll()
+                .Include(x => x.TimelinePosts)
+                .ToListAsync();
+
+            if (users != null)
+            {
+                foreach (var user in users.Where(user => user.TimelinePosts != null))
+                {
+                    allPosts.AddRange(user.TimelinePosts);
+                }
+            }
+                
 
             return allPosts.OrderByDescending(x => x.Created).ToList();
         }

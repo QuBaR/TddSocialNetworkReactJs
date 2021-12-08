@@ -5,6 +5,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using TddSocialNetwork.Engine;
+using TddSocialNetwork.Model;
 using TddSocialNetwork.Web.Dto;
 
 namespace TddSocialNetwork.Web.Controllers
@@ -31,7 +32,10 @@ namespace TddSocialNetwork.Web.Controllers
         [HttpGet("wall")]
         public async Task<ActionResult<IEnumerable<PostDto>>> Wall(string userName)
         {
-            var posts = await _socialNetworkEngine.Wall(userName);
+            var posts = string.IsNullOrEmpty(userName)
+                ? await _socialNetworkEngine.Wall()
+                : await _socialNetworkEngine.Wall(userName);
+
             return _mapper.Map<List<PostDto>> (posts);
         }
 
