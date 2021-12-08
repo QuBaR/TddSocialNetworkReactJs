@@ -12,5 +12,6 @@ namespace TddSocialNetwork.Engine
         void SendMessage(string userName, string receiverName, string messageToSend);
         List<Message> ViewMessages(string receiverName);
         Task<List<Post>> Wall(string userName);
+        Task<List<User>> Users();
     }
 }

@@ -140,5 +140,12 @@ namespace TddSocialNetwork.Engine
 
             return allPosts.OrderByDescending(x => x.Created).ToList();
         }
+
+        public async Task<List<User>> Users()
+        {
+            return await _userRepository
+                .GetAll()
+                .ToListAsync();
+        }
     }
 }

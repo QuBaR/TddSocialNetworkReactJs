@@ -14,14 +14,14 @@ namespace Webb.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PostsController : ControllerBase
+    public class SocialMediaController : ControllerBase
     {
         private readonly ISocialNetworkEngine _socialNetworkEngine;
-        private readonly ILogger<PostsController> _logger;
+        private readonly ILogger<SocialMediaController> _logger;
         private readonly IMapper _mapper;
 
-        public PostsController(
-            ILogger<PostsController> logger, 
+        public SocialMediaController(
+            ILogger<SocialMediaController> logger, 
             IMapper mapper,
             ISocialNetworkEngine socialNetworkEngine)
         {
@@ -36,6 +36,14 @@ namespace Webb.Controllers
         {
             var posts = await _socialNetworkEngine.Wall(userName);
             return _mapper.Map<List<PostDto>> (posts);
+        }
+
+        // GET: api/users
+        [HttpGet("users")]
+        public async Task<ActionResult<IEnumerable<UserDto>>> Users()
+        {
+            var users = await _socialNetworkEngine.Users();
+            return _mapper.Map<List<UserDto>> (users.OrderBy(x => x.Name));
         }
 
         //// GET: api/Posts/5
