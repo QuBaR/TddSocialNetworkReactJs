@@ -87,6 +87,7 @@ export class Wall extends Component {
         axios.post('api/socialmedia/post/',data)
             .then( result => {
                 console.log(result);
+                this.populateuser(id);
             })
             .catch( error => {
                 console.log(error);

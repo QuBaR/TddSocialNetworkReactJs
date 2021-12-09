@@ -34,7 +34,7 @@ namespace TddSocialNetwork.Engine
                     User = existingUser
                 };
                 _postRepository.Insert(post);
-                _postRepository.Save();
+                _userRepository.Save();
             }
             else
             {

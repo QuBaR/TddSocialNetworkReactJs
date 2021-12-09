@@ -28,6 +28,7 @@ namespace TddSocialNetwork.Data
         public void Insert(T entity)
         {
             DbSet.Add(entity);
+            Context.SaveChangesAsync();
         }
 
         public void Update(T obj)
