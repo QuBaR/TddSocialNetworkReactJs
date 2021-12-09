@@ -11,8 +11,15 @@ namespace TddSocialNetwork.Web
             CreateMap<User, UserDto>()
                 .ReverseMap();
 
+            CreateMap<User, WallUserDto>()
+                .ReverseMap();
+
             CreateMap<Post, PostDto>()
                 .ReverseMap();
+            
+            CreateMap<Post, WallPostDto>()
+                .ReverseMap();            
+            
         }
     }
 }

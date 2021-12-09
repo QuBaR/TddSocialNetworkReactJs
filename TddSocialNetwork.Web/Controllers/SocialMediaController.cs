@@ -28,15 +28,20 @@ namespace TddSocialNetwork.Web.Controllers
             _socialNetworkEngine = socialNetworkEngine;
         }
 
-        // GET: api/Posts
-        [HttpGet("wall")]
-        public async Task<ActionResult<IEnumerable<PostDto>>> Wall(string userName)
-        {
-            var posts = string.IsNullOrEmpty(userName)
-                ? await _socialNetworkEngine.Wall()
-                : await _socialNetworkEngine.Wall(userName);
 
+        [HttpGet("wall")]
+        public async Task<ActionResult<IEnumerable<PostDto>>> Wall()
+        {
+            var posts = await _socialNetworkEngine.Wall();
             return _mapper.Map<List<PostDto>> (posts);
+        }
+
+        [HttpGet("wall/{id}")]
+        public async Task<ActionResult<WallUserDto>> Wall(string id)
+        {
+            var user =  await _socialNetworkEngine.Wall(int.Parse(id));
+
+            return _mapper.Map<WallUserDto> (user);
         }
 
         // GET: api/users
@@ -47,82 +52,13 @@ namespace TddSocialNetwork.Web.Controllers
             return _mapper.Map<List<UserDto>> (users.OrderBy(x => x.Name));
         }
 
-        //// GET: api/Posts/5
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<PostDto>> GetPost(int id)
-        //{
-        //    var post = await _context
-        //        .Posts
-        //        .Include(x => x.User)
-        //        .FirstOrDefaultAsync(x => x.Id == id);
+        [HttpPost("post")]
+        public async Task<ActionResult> Post([FromBody]SendPostDto sendPostDto)
+        {
+            _socialNetworkEngine.Post(sendPostDto.Id, sendPostDto.Message);
 
-        //    if (post == null)
-        //    {
-        //        return NotFound();
-        //    }
+            return Ok();
+        }
 
-        //    return _mapper.Map<PostDto>(post);
-        //}
-
-        //// PUT: api/Posts/5
-        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutPost(int id, Post post)
-        //{
-        //    if (id != post.Id)
-        //    {
-        //        return BadRequest();
-        //    }
-
-        //    _context.Entry(post).State = EntityState.Modified;
-
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!PostExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-
-        //        throw;
-        //    }
-
-        //    return NoContent();
-        //}
-
-        //// POST: api/Posts
-        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[HttpPost]
-        //public async Task<ActionResult<PostDto>> PostPost(Post post)
-        //{
-        //    _context.Posts.Add(post);
-        //    await _context.SaveChangesAsync();
-
-        //    return CreatedAtAction("GetPost", new { id = post.Id }, _mapper.Map<PostDto>(post));
-        //}
-
-        //// DELETE: api/Posts/5
-        //[HttpDelete("{id}")]
-        //public async Task<IActionResult> DeletePost(int id)
-        //{
-        //    var post = await _context.Posts.FindAsync(id);
-        //    if (post == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    _context.Posts.Remove(post);
-        //    await _context.SaveChangesAsync();
-
-        //    return NoContent();
-        //}
-
-        //private bool PostExists(int id)
-        //{
-        //    return _context.Posts.Any(e => e.Id == id);
-        //}
     }
 }

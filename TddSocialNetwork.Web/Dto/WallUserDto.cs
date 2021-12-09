@@ -2,7 +2,7 @@
 
 namespace TddSocialNetwork.Web.Dto
 {
-    public class UserDto
+    public class WallUserDto
     {
         public int Id { get; set; }
         public string Name { get; set; }

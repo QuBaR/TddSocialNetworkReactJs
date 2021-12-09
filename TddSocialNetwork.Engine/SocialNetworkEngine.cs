@@ -20,19 +20,25 @@ namespace TddSocialNetwork.Engine
             _userRepository = userRepository;
         }
 
-        public void Post(string name, string message)
+        public void Post(string userId, string message)
         {
             var existingUser = _userRepository
                 .GetAll()
-                .FirstOrDefault(x => x.Name == name);
+                .Include(x => x.TimelinePosts)
+                .FirstOrDefault(x => x.Id == int.Parse(userId));
             
             if (existingUser != null)
             {
-                existingUser.TimelinePosts.Add(new Post(message));
+                var post = new Post(message)
+                {
+                    User = existingUser
+                };
+                _postRepository.Insert(post);
+                _postRepository.Save();
             }
             else
             {
-                var newUser = new User(name);
+                var newUser = new User(userId);
                 var post = new Post(message);
                 newUser.TimelinePosts.Add(post);
                 _userRepository.Insert(newUser);
@@ -113,30 +119,19 @@ namespace TddSocialNetwork.Engine
 
         public List<Message> ViewMessages(string receiverName)
         {
-            return _userRepository.GetAll().FirstOrDefault(x => x.Name == receiverName)?.PrivateMessages;
+            return _userRepository
+                .GetAll()
+                .FirstOrDefault(x => x.Name == receiverName)?
+                .PrivateMessages;
         }
 
-        public async Task<List<Post>> Wall(string userName)
+        public async Task<User> Wall(int userId)
         {
-            var allPosts = new List<Post>();
-
-            var user = await _userRepository.GetAll()
-                .FirstOrDefaultAsync(x => x.Name == userName);
-
-            if (user != null)
-            {
-                foreach (var followerUser in user?.FollowerUsers)
-                {
-                    var timelinePosts = await _userRepository.GetAll()
-                        .Include(x => x.TimelinePosts)
-                        .FirstOrDefaultAsync(x => x.Name == followerUser.Name);
-
-                    if (timelinePosts != null)
-                        allPosts.AddRange(timelinePosts.TimelinePosts);
-                }
-            }
-
-            return allPosts.OrderByDescending(x => x.Created).ToList();
+            return await _userRepository
+                .GetAll()
+                .Include(x => x.TimelinePosts)
+                .Include(x => x.FollowerUsers)
+                .FirstOrDefaultAsync(x => x.Id == userId);
         }
 
         public async Task<List<Post>> Wall()
